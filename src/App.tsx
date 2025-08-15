@@ -7,8 +7,9 @@ import { HomePage } from "./pages/HomePage";
 function App() {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header />
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/chat/:persona" element={<Chat />} />
