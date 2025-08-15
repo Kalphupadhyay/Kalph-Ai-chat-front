@@ -1,69 +1,118 @@
-# React + TypeScript + Vite
+# Kalph AI Persona Chat
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, persona-based chat application that allows users to interact with AI assistants through different personality lenses.
 
-Currently, two official plugins are available:
+![Kalph AI Chat](./assets/suit-work.jpg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Multiple AI Personas**: Chat with AI characters that have distinct personalities and conversational styles
+- **Responsive Design**: Works seamlessly across desktop and mobile devices
+- **ChatGPT-like Interface**: Clean, intuitive UI inspired by leading chat applications
+- **Real-time Responses**: Instant AI responses powered by cutting-edge language models
+- **Markdown Support**: Rich text formatting for code blocks, lists, and more
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technology Stack
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React**: Frontend framework
+- **TypeScript**: Type-safe JavaScript
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Vite**: Next-generation frontend tooling
+- **Bun**: Fast JavaScript runtime and package manager
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
+
+- Node.js 16+ or Bun installed on your machine
+- Basic knowledge of React and TypeScript
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Kalphupadhyay/Kalph-Ai-chat-front.git
+   cd Kalph-Ai-chat-front
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   # Using npm
+   npm install
+
+   # Or using Bun
+   bun install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   # Using npm
+   npm run dev
+
+   # Or using Bun
+   bun run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Usage
+
+1. Select a persona from the available options
+2. Type your message in the input field at the bottom
+3. Press Enter or click the send button to submit your message
+4. The AI will respond based on the selected persona's characteristics
+
+## Project Structure
+
+```
+src/
+├── assets/         # Static assets like images
+├── components/     # Reusable UI components
+│   ├── Chat.tsx    # Main chat container
+│   ├── ChatMessage.tsx # Individual message component
+│   ├── Header.tsx  # Application header
+│   └── Persona.tsx # Persona selection component
+├── config/         # Configuration files
+├── constants/      # API endpoints and other constants
+└── pages/          # Application pages
+    └── HomePage.tsx # Main application page
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Customization
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Adding New Personas
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+To add a new persona, update the persona data in your application:
+
+1. Add the persona details to your personas data store
+2. Include a unique identifier, name, and description
+3. Optionally add an avatar image for the persona
+
+### Styling
+
+The application uses Tailwind CSS for styling. You can customize the appearance by:
+
+1. Modifying the Tailwind configuration in `tailwind.config.js`
+2. Updating class names in component files
+3. Adding custom CSS in the respective component files
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Built with ❤️ by Kalph
+- UI inspired by ChatGPT
+- Thanks to all contributors and supporters
+
+---
+
+© 2025 Kalph AI Chat. All rights reserved.
