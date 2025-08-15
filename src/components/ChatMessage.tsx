@@ -19,15 +19,19 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, persona }) => {
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-4`}>
       <div
-        className={`max-w-[70%] rounded-lg p-3 ${
-          isUser ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
+        className={`max-w-[80%] rounded-2xl p-4 ${
+          isUser
+            ? "bg-[#343541] text-white"
+            : "bg-[#444654] text-gray-100 border border-gray-700"
         }`}
       >
-        <div className="font-bold">{isUser ? "You" : persona}</div>
-        <p>
+        <div className="font-medium text-sm mb-1">
+          {isUser ? "You" : persona}
+        </div>
+        <div className="prose prose-invert max-w-none">
           <ReactMarkdown>{message.text}</ReactMarkdown>
-        </p>
-        <div className="text-xs opacity-70 text-right mt-1">
+        </div>
+        <div className="text-xs text-gray-400 text-right mt-2">
           {message.timestamp.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
