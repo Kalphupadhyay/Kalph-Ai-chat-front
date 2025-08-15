@@ -2,8 +2,6 @@
 
 A modern, persona-based chat application that allows users to interact with AI assistants through different personality lenses.
 
-![Kalph AI Chat](./assets/suit-work.jpg)
-
 ## Features
 
 - **Multiple AI Personas**: Chat with AI characters that have distinct personalities and conversational styles
