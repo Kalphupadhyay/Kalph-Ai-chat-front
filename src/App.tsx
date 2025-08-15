@@ -1,0 +1,21 @@
+import { BrowserRouter, Route, Routes } from "react-router";
+import "./App.css";
+import Chat from "./components/Chat";
+import { Header } from "./components/header";
+import { HomePage } from "./pages/HomePage";
+
+function App() {
+  return (
+    <>
+      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/chat/:persona" element={<Chat />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+}
+
+export default App;
