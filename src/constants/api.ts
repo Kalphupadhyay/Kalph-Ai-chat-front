@@ -1,4 +1,4 @@
 export const apiConfig = {
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: "https://kalph-ai-chat-backend.vercel.app/api",
   chat: "/chat",
 };
