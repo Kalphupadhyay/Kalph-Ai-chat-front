@@ -10,9 +10,9 @@ export const PersonaContainer: React.FC<{
       className="persona-card p-5 border border-gray-300 rounded-lg shadow-md flex cursor-pointer 
       hover:shadow-xl transition-all duration-300 hover:border-blue-400 
       hover:bg-gradient-to-br 
-      hover:-translate-y-1 hover:scale-105 transform"
+      hover:-translate-y-1 hover:scale-105 transform "
     >
-      <div className="img size-28 mr-4 rounded-lg overflow-hidden">
+      <div className="img size-32 mr-4 rounded-lg overflow-hidden">
         <img
           src={image}
           alt={name}
@@ -27,7 +27,7 @@ export const PersonaContainer: React.FC<{
           <div className="size-2.5 bg-green-500 rounded-full animate-pulse"></div>
           <p>Online</p>
         </div>
-        <p className="text-gray-700">{description}</p>
+        <p className="text-gray-500 max-w-xs">{description}</p>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ export const ChatHeader: React.FC<{
         <img src={image} alt={persona} className="w-full h-full" />
       </div>
       <div className="">
-        <h4>{persona}</h4>
+        <h4>{persona.replace("-", " ")}</h4>
         <OnlineIcon />
       </div>
     </div>

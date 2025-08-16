@@ -24,13 +24,13 @@ export const HomePage: React.FC = () => {
             image="/assets/kalph-work.jpg"
             personaClick={() => handlePersonaClick("kalph-work")}
             name="Workholic Kalph"
-            description="This is workholic Kalph"
+            description="This is working kalph, he is always on the grind and loves to work hard and explore new ideas."
           />
           <PersonaContainer
             image="/assets/kalph-chill.png"
             personaClick={() => handlePersonaClick("kalph-chill")}
             name="Chill Kalph"
-            description="This is Outside work kalph"
+            description="This is Outside work kalph who loves to chill and relax, he is always up for a good time and enjoys life to the fullest."
           />
         </div>
       </div>
