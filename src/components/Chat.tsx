@@ -109,7 +109,11 @@ const Chat: React.FC = () => {
           {messages.length === 0 ? (
             <div className="text-center text-gray-500 mt-8">
               <p>Start a conversation with {persona}!</p>
-              <ChatSuggestions />
+              <ChatSuggestions
+                onSuggestionClick={(message) => {
+                  setInputMessage(message);
+                }}
+              />
             </div>
           ) : (
             messages.map((message) => (
