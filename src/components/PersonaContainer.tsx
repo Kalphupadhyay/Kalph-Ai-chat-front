@@ -1,4 +1,4 @@
-export const Persona: React.FC<{
+export const PersonaContainer: React.FC<{
   name: string;
   description: string;
   personaClick: () => void;

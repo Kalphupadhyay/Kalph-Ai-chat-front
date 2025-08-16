@@ -1,10 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect } from "react";
 import ChatMessage from "./ChatMessage";
 import type { Message } from "./ChatMessage";
-import { Link, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { ChatHeader } from "./Chat-Header";
 import { axiosInstance } from "../config/axios";
 import { apiConfig } from "../constants/api";
+import { ChatSideMenu } from "./Chat-sideMenu";
+import { Persona } from "../constants/enum/persona";
+import ChatSuggestions from "./Chat-suggestions";
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -12,11 +16,23 @@ const Chat: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { persona } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (![Persona.CHILL, Persona.WORK].includes(persona as Persona)) {
+      navigate("/"); // Redirect to home if persona is not specified
+      return;
+    }
+  }, []);
 
   // Scroll to bottom of chat when messages change
   useEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    setMessages([]); // Reset messages when persona changes
+  }, [persona]);
 
   // Generate a unique ID for messages
   const generateId = () => {
@@ -56,7 +72,7 @@ const Chat: React.FC = () => {
         message: inputMessage,
         persona: persona,
       });
-      console.log("Response:", response.data);
+
       // Add assistant response to chat
       const assistantMessage: Message = {
         id: generateId(),
@@ -86,49 +102,14 @@ const Chat: React.FC = () => {
 
   return (
     <div className="flex h-[calc(100vh-64px)]">
-      <aside className="h-full flex flex-col bg-zinc-900 border-r border-zinc-800 transition-all duration-300 ease-in-out w-64">
-        <div className="p-4">
-          <h2 className="text-lg font-semibold text-white">Personas</h2>
-        </div>
-        <div className="flex-1 overflow-y-auto">
-          <Link
-            to={`/chat/kalph-work`}
-            className="block p-4 hover:bg-zinc-800 transition-colors bg-green-700"
-          >
-            <div className="bg-green flex gap-2 items-center">
-              <div className="size-8 rounded-full overflow-auto ">
-                <img
-                  src={getPersonaImage("kalph-work")}
-                  alt="profile"
-                  className="w-full h-full"
-                />
-              </div>
-              <div className="">
-                <h4 className="text-white text-lg">Kalph work</h4>
-                <p className="text-gray-400 text-xm">click to chat</p>
-              </div>
-            </div>
-          </Link>
-          <Link
-            to={`/chat/kalph-chill`}
-            className="block p-4 hover:bg-zinc-800 transition-colors "
-          >
-            <div className=" flex gap-2 items-center">
-              <div className="size-8 rounded-full bg-amber-950"></div>
-              <div className="">
-                <h4 className="text-white text-lg">Kalph chill</h4>
-                <p className="text-gray-400 text-xm">click to chat</p>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </aside>
+      <ChatSideMenu persona={persona!} />
       <div className="flex flex-col flex-1 bg-zinc-800 text-white">
         <ChatHeader image={getPersonaImage(persona!)!} persona={persona!} />
         <div className="flex-1 overflow-y-auto p-4 space-y-4 ">
           {messages.length === 0 ? (
             <div className="text-center text-gray-500 mt-8">
               <p>Start a conversation with {persona}!</p>
+              <ChatSuggestions />
             </div>
           ) : (
             messages.map((message) => (

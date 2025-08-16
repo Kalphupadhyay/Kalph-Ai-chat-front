@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { Persona } from "../components/Persona";
+import { PersonaContainer } from "../components/PersonaContainer";
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -16,13 +16,13 @@ export const HomePage: React.FC = () => {
       </h1>
       <p className="text-center mb-6">Start chatting by selecting a persona!</p>
       <div className="flex justify-center gap-4">
-        <Persona
+        <PersonaContainer
           image="/assets/kalph-work.jpg"
           personaClick={() => handlePersonaClick("kalph-work")}
           name="Workholic Kalph"
           description="This is workholic Kalph"
         />
-        <Persona
+        <PersonaContainer
           image="/assets/kalph-work.jpg"
           personaClick={() => handlePersonaClick("kalph-chill")}
           name="Chill Kalph"
