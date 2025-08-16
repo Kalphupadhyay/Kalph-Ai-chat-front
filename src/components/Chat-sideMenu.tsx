@@ -16,7 +16,7 @@ export const ChatSideMenu = (props: ChatSideMenuProps) => {
   };
 
   return (
-    <aside className="h-full flex flex-col bg-zinc-900 border-r border-zinc-800 transition-all duration-300 ease-in-out w-64">
+    <aside className="h-full hidden  sm:flex flex-col bg-zinc-900 border-r border-zinc-800 transition-all duration-300 ease-in-out w-64">
       <div className="p-4">
         <h2 className="text-lg font-semibold text-white">Personas</h2>
       </div>

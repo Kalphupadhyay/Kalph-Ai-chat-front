@@ -19,7 +19,7 @@ export const HomePage: React.FC = () => {
         <p className="text-center mb-6">
           Start chatting by selecting a persona!
         </p>
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 flex-col md:flex-row">
           <PersonaContainer
             image="/assets/kalph-work.jpg"
             personaClick={() => handlePersonaClick("kalph-work")}
