@@ -26,7 +26,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, persona }) => {
         }`}
       >
         <div className="font-medium text-sm mb-1">
-          {isUser ? "You" : persona}
+          {isUser ? "You" : persona.replace("-", " ")}
         </div>
         <div className="prose prose-invert max-w-none">
           <ReactMarkdown>{message.text}</ReactMarkdown>
