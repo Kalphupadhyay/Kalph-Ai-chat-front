@@ -8,6 +8,7 @@ import { apiConfig } from "../constants/api";
 import { ChatSideMenu } from "./Chat-sideMenu";
 import { Persona } from "../constants/enum/persona";
 import ChatSuggestions from "./Chat-suggestions";
+import { generateId } from "../utils/id";
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -33,19 +34,16 @@ const Chat: React.FC = () => {
     setMessages([]); // Reset messages when persona changes
   }, [persona]);
 
-  // Generate a unique ID for messages
-  const generateId = () => {
-    return Date.now().toString(36) + Math.random().toString(36).substring(2);
-  };
-
-  const getPersonaImage = (persona: string) => {
-    switch (persona) {
+  const getPersonaImage = React.useCallback((personaName: string) => {
+    switch (personaName) {
       case "kalph-work":
         return "/assets/kalph-work.jpg";
       case "kalph-chill":
         return "/assets/kalph-chill.png";
+      default:
+        return "";
     }
-  };
+  }, []);
 
   // Handle sending a message
   const handleSendMessage = async (e: React.FormEvent) => {
