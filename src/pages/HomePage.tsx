@@ -17,13 +17,13 @@ export const HomePage: React.FC = () => {
       <p className="text-center mb-6">Start chatting by selecting a persona!</p>
       <div className="flex justify-center gap-4">
         <Persona
-          image="/assets/suit-work.jpg"
+          image="/assets/kalph-work.jpg"
           personaClick={() => handlePersonaClick("kalph-work")}
           name="Workholic Kalph"
           description="This is workholic Kalph"
         />
         <Persona
-          image="/assets/suit-work.jpg"
+          image="/assets/kalph-work.jpg"
           personaClick={() => handlePersonaClick("kalph-chill")}
           name="Chill Kalph"
           description="This is Outside work kalph"

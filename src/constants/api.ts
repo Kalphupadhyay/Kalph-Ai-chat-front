@@ -1,3 +1,3 @@
 export const apiConfig = {
-  chat: "/",
+  chat: "/chat",
 };

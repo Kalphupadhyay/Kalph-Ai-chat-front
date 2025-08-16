@@ -14,9 +14,10 @@ export const Persona: React.FC<{
       </div>
       <div className="">
         <h2 className="text-xl font-semibold ">{name}</h2>
-        <p className="flex items-center gap-2">
-          <div className="size-2.5 bg-green-500 rounded-full"></div> Online
-        </p>
+        <div className="flex items-center gap-2">
+          <div className="size-2.5 bg-green-500 rounded-full"></div>
+          <p>Online</p>
+        </div>
         <p className="text-gray-700">{description}</p>
       </div>
     </div>
