@@ -48,7 +48,13 @@ export const ChatSideMenu = (props: ChatSideMenuProps) => {
           } `}
         >
           <div className=" flex gap-2 items-center">
-            <div className="size-8 rounded-full bg-amber-950"></div>
+            <div className="size-8 rounded-full overflow-auto ">
+              <img
+                src={getPersonaImage("kalph-chill")}
+                alt="profile"
+                className="w-full h-full"
+              />
+            </div>
             <div className="">
               <h4 className="text-white text-lg">Kalph chill</h4>
               <p className={`text-gray-400 text-xm`}>click to chat</p>

@@ -4,7 +4,6 @@ import ChatMessage from "./ChatMessage";
 import type { Message } from "./ChatMessage";
 import { useNavigate, useParams } from "react-router";
 import { ChatHeader } from "./Chat-Header";
-import { axiosInstance } from "../config/axios";
 import { apiConfig } from "../constants/api";
 import { ChatSideMenu } from "./Chat-sideMenu";
 import { Persona } from "../constants/enum/persona";
@@ -66,23 +65,57 @@ const Chat: React.FC = () => {
     setInputMessage("");
     setIsLoading(true);
 
-    try {
-      // Replace with your actual API endpoint
-      const response = await axiosInstance.post(apiConfig.chat, {
-        message: inputMessage,
-        persona: persona,
-      });
-
-      // Add assistant response to chat
-      const assistantMessage: Message = {
-        id: generateId(),
-        text:
-          response.data.message || "Sorry, I couldn't process that request.",
+    const assistantId = generateId();
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: assistantId,
+        text: "",
         sender: "assistant",
         timestamp: new Date(),
-      };
+      },
+    ]);
 
-      setMessages((prev) => [...prev, assistantMessage]);
+    try {
+      // Replace with your actual API endpoint
+      const response = await fetch(`${apiConfig.baseURL}${apiConfig.chat}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: inputMessage,
+          persona: persona,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Get a reader from the response body stream
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error("No reader available");
+
+      const decoder = new TextDecoder();
+      let accumulatedText = "";
+
+      // Add assistant response to chat
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) break;
+
+        // Decode the chunk and add it to our accumulated text
+        const chunk = decoder.decode(value, { stream: true });
+        accumulatedText += chunk;
+
+        // Update the assistant message with the accumulated text so far
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === assistantId ? { ...msg, text: accumulatedText } : msg
+          )
+        );
+      }
     } catch (error) {
       console.error("Error sending message:", error);
 

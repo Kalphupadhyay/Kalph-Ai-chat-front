@@ -23,7 +23,7 @@ export const HomePage: React.FC = () => {
           description="This is workholic Kalph"
         />
         <PersonaContainer
-          image="/assets/kalph-work.jpg"
+          image="/assets/kalph-chill.png"
           personaClick={() => handlePersonaClick("kalph-chill")}
           name="Chill Kalph"
           description="This is Outside work kalph"
