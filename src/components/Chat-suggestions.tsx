@@ -1,38 +1,58 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
+import { Persona } from "../constants/enum/persona";
 
 // Make sure you have Material Symbols font loaded in your index.html or _app.tsx:
 // <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
 interface ChatSuggestionProps {
+  persona: string;
   onSuggestionClick?: (suggestion: string) => void;
 }
 
-const suggestions = [
+const workSuggestions = [
   {
-    icon: "lightbulb",
+    icon: "question_answer",
     color: "text-yellow-400",
-    text: "Give me a productivity tip",
+    text: "Tell me Favorite Programming Language of Kalph",
   },
   {
     icon: "question_answer",
     color: "text-blue-400",
-    text: "Explain a complex topic simply",
+    text: "What can Kalph do?",
+  },
+];
+
+const chillSuggestions = [
+  {
+    icon: "emoji_emotions",
+    color: "text-pink-400",
+    text: "Tell me favorite sport of Kalph",
   },
   {
-    icon: "psychology",
+    icon: "music_note",
     color: "text-purple-400",
-    text: "Motivate me for my next task",
-  },
-  {
-    icon: "code",
-    color: "text-green-400",
-    text: "Help me debug my code",
+    text: "Favorite game of Kalph",
   },
 ];
 
 const ChatSuggestions: React.FC<ChatSuggestionProps> = ({
   onSuggestionClick,
+  persona, // Default to work persona
 }) => {
+  const [suggestions, setSuggestions] = React.useState(
+    workSuggestions // Default to work suggestions
+  );
+
+  useEffect(() => {
+    // Update suggestions based on persona
+    if (persona === Persona.WORK) {
+      setSuggestions(workSuggestions);
+    } else {
+      setSuggestions(chillSuggestions);
+    }
+  }, [persona]);
+
   return (
     <div className="flex flex-wrap gap-4 justify-center my-6">
       {suggestions.map((s, idx) => (

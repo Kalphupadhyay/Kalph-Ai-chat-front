@@ -88,6 +88,7 @@ const Chat: React.FC = () => {
           persona: persona,
         }),
       });
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -126,8 +127,11 @@ const Chat: React.FC = () => {
         sender: "assistant",
         timestamp: new Date(),
       };
-
-      setMessages((prev) => [...prev, errorMessage]);
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === assistantId ? { ...msg, text: errorMessage.text } : msg
+        )
+      );
     } finally {
       setIsLoading(false);
     }
@@ -143,6 +147,7 @@ const Chat: React.FC = () => {
             <div className="text-center text-gray-500 mt-8">
               <p>Start a conversation with {persona}!</p>
               <ChatSuggestions
+                persona={persona!}
                 onSuggestionClick={(message) => {
                   setInputMessage(message);
                 }}
