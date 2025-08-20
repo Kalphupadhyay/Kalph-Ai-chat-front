@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect } from "react";
-import ChatMessage from "./ChatMessage";
-import type { Message } from "./ChatMessage";
+import ChatMessage from "../components/ChatMessage";
+import type { Message } from "../components/ChatMessage";
 import { useNavigate, useParams } from "react-router";
-import { ChatHeader } from "./Chat-Header";
+import { ChatHeader } from "../components/Chat-Header";
 import { apiConfig } from "../constants/api";
-import { ChatSideMenu } from "./Chat-sideMenu";
+import { ChatSideMenu } from "../components/Chat-sideMenu";
 import { Persona } from "../constants/enum/persona";
-import ChatSuggestions from "./Chat-suggestions";
+import ChatSuggestions from "../components/Chat-suggestions";
 import { generateId } from "../utils/id";
 
 const Chat: React.FC = () => {

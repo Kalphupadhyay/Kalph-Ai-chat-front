@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import "./App.css";
-import Chat from "./components/Chat";
+import Chat from "./pages/Chat";
 import { Header } from "./components/Header";
 import { HomePage } from "./pages/HomePage";
 import NotFound from "./components/not-found";
