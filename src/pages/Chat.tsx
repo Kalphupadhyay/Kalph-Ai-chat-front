@@ -45,13 +45,11 @@ const Chat: React.FC = () => {
     }
   }, []);
 
-  // Handle sending a message
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!inputMessage.trim()) return;
 
-    // Add user message to chat
     const userMessage: Message = {
       id: generateId(),
       text: inputMessage,
