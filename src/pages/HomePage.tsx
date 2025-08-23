@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { PersonaContainer } from "../components/PersonaContainer";
 import { Footer } from "../components/footer";
 
@@ -32,6 +32,14 @@ export const HomePage: React.FC = () => {
             name="Chill Kalph"
             description="This is Outside work kalph who loves to chill and relax, he is always up for a good time and enjoys life to the fullest."
           />
+        </div>
+        <div className="text-center mt-8">
+          <p className="text-gray-500 mb-2">
+            Or try the Notebook LLM for a different experience!
+          </p>
+          <Link to="/notebook" className="text-blue-500 hover:underline">
+            Go to Notebook LLM
+          </Link>
         </div>
       </div>
       <Footer />
