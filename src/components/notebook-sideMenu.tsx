@@ -1,4 +1,50 @@
+import { useRef, useState } from "react";
+
 export const NoteBookSideMenu = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [dragActive, setDragActive] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+
+  // Handle click on the div to trigger file input
+  const handleDivClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const filesArray = Array.from(event.target.files);
+
+      setUploadedFiles(filesArray);
+      console.log(filesArray);
+      // You can add additional logic here to process files
+    }
+  };
+
+  // Handle drag events
+  const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const filesArray = Array.from(e.dataTransfer.files);
+      setUploadedFiles(filesArray);
+      console.log(filesArray);
+      // You can add additional logic here to process files
+    }
+  };
+
   return (
     <div className="w-[40%] px-4">
       <div className="">
@@ -28,7 +74,16 @@ export const NoteBookSideMenu = () => {
         </div>
         <div className="">
           <p className="mt-5 mb-2">Upload your files</p>
-          <div className="h-28 border border-dashed border-gray-700  w-full grid place-items-center rounded">
+          <div
+            onClick={handleDivClick}
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
+            onDrop={handleDrop}
+            className={`h-28 border border-dashed ${
+              dragActive ? "border-blue-500 " : "border-gray-700"
+            }   w-full grid place-items-center rounded`}
+          >
             <div className="">
               <div className="text-center">
                 <p className="material-symbols-outlined block text-center !text-3xl ">
@@ -41,13 +96,13 @@ export const NoteBookSideMenu = () => {
               </p>
             </div>
           </div>
-
-          <input
-            type="file"
-            className="w-full p-2 border border-gray-700 rounded mt-2 hidden"
-            multiple
-          />
         </div>
+        <input
+          onChange={handleFileChange}
+          ref={fileInputRef}
+          type="file"
+          className="w-full p-2 border border-gray-700 rounded mt-2 hidden"
+        />
       </div>
     </div>
   );
