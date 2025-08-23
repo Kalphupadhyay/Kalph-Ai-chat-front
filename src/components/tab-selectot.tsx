@@ -46,7 +46,7 @@ const TabContent: React.FC<TabContentProps> = ({ isActive, children }) => {
 };
 
 interface TabSelectorProps {
-  handleSubmit: () => void;
+  handleSubmit: (data: File | string) => void;
 }
 
 export const TabSelector = (props: TabSelectorProps) => {
@@ -90,7 +90,7 @@ export const TabSelector = (props: TabSelectorProps) => {
     }
     // Logic to upload files to RAG system
     console.log("Uploading files to RAG:", files);
-    props.handleSubmit();
+    props.handleSubmit(files[0]);
     // You can add your file upload logic here
   };
 
@@ -142,6 +142,18 @@ export const TabSelector = (props: TabSelectorProps) => {
               {index === 2 && (
                 <div className="animate-fadeIn">
                   <UploadBox getUploadedFiles={handleFileUpload} />
+                  <div className="">
+                    {files.length > 0 && (
+                      <div className="mt-4">
+                        <h3 className="font-medium mb-2">Selected Files:</h3>
+                        <ul className="list-disc list-inside">
+                          {files.map((file, idx) => (
+                            <li key={idx}>{file.name}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

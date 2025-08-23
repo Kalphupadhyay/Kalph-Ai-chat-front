@@ -10,6 +10,12 @@ export const NoteBookSideMenu = () => {
     setShowModal(!showModal);
   };
 
+  const handleSubmit = (data: File | string) => {
+    console.log("Submitted data:", data);
+    // Handle submission logic here
+    toggleModal();
+  };
+
   return (
     <div className="w-[40%] px-4">
       <div className="">
@@ -32,7 +38,7 @@ export const NoteBookSideMenu = () => {
       {showModal && (
         <>
           <ModalContainer isOpen={showModal}>
-            <TabSelector handleSubmit={toggleModal} />
+            <TabSelector handleSubmit={handleSubmit} />
           </ModalContainer>
         </>
       )}

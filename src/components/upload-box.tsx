@@ -57,7 +57,7 @@ export const UploadBox = (props: UploadBoxProps) => {
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
-          className={`h-28 border border-dashed ${
+          className={`h-38 border border-dashed ${
             dragActive ? "border-blue-500 " : "border-gray-700"
           }   w-full grid place-items-center rounded`}
         >
@@ -71,6 +71,9 @@ export const UploadBox = (props: UploadBoxProps) => {
             <p className="text-center text-sm text-gray-600">
               or click to select files
             </p>
+            <p className="text-sm text-gray-500 mt-2">
+              Supported formats: PDF, DOCX, TXT. Max size: 10MB.
+            </p>
           </div>
         </div>
       </div>
@@ -80,6 +83,7 @@ export const UploadBox = (props: UploadBoxProps) => {
         type="file"
         className="w-full p-2 border border-gray-700 rounded mt-2 hidden"
       />
+      <div className=""></div>
     </>
   );
 };
