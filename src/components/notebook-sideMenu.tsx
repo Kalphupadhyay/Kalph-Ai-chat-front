@@ -31,8 +31,8 @@ export const NoteBookSideMenu = () => {
 
       {showModal && (
         <>
-          <ModalContainer onClose={toggleModal} isOpen={showModal}>
-            <TabSelector />
+          <ModalContainer isOpen={showModal}>
+            <TabSelector handleSubmit={toggleModal} />
           </ModalContainer>
         </>
       )}

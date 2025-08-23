@@ -45,8 +45,13 @@ const TabContent: React.FC<TabContentProps> = ({ isActive, children }) => {
   );
 };
 
-export const TabSelector: React.FC = () => {
+interface TabSelectorProps {
+  handleSubmit: () => void;
+}
+
+export const TabSelector = (props: TabSelectorProps) => {
   const [activeTab, setActiveTab] = useState(0);
+  const [files, setFiles] = useState<File[]>([]);
 
   const tabs = [
     {
@@ -57,7 +62,7 @@ export const TabSelector: React.FC = () => {
   ];
 
   const handleFileUpload = (files: File[]) => {
-    console.log("Uploaded files:", files);
+    setFiles(files);
     // You can add additional logic here to handle the uploaded files
   };
 
@@ -70,6 +75,7 @@ export const TabSelector: React.FC = () => {
         // Handle URL submission
         break;
       case 2:
+        uploadFileToRag();
         // Handle file upload submission
         break;
       default:
@@ -77,9 +83,15 @@ export const TabSelector: React.FC = () => {
     }
   };
 
-  const uploadFileToRag = (file: File) => {
-    // Logic to upload the file to the server
-    console.log("Uploading file to server:", file);
+  const uploadFileToRag = () => {
+    if (files.length === 0) {
+      console.error("No files to upload");
+      return;
+    }
+    // Logic to upload files to RAG system
+    console.log("Uploading files to RAG:", files);
+    props.handleSubmit();
+    // You can add your file upload logic here
   };
 
   return (
@@ -135,6 +147,12 @@ export const TabSelector: React.FC = () => {
             </div>
           </TabContent>
         ))}
+      </div>
+      <div className="flex justify-end gap-5">
+        <button onClick={handleSubmit} className="cursor-pointer">
+          Submit
+        </button>
+        <button className="cursor-pointer">Cancel</button>
       </div>
     </div>
   );
