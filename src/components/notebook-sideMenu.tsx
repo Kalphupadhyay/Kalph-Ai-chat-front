@@ -1,48 +1,13 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { ModalContainer } from "./modal/modal";
+import TabSelector from "./tab-selectot";
+import LoadingBar from "./loading-bar";
 
 export const NoteBookSideMenu = () => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [dragActive, setDragActive] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [showModal, setShowModal] = useState(false);
 
-  // Handle click on the div to trigger file input
-  const handleDivClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const filesArray = Array.from(event.target.files);
-
-      setUploadedFiles(filesArray);
-      console.log(filesArray);
-      // You can add additional logic here to process files
-    }
-  };
-
-  // Handle drag events
-  const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const filesArray = Array.from(e.dataTransfer.files);
-      setUploadedFiles(filesArray);
-      console.log(filesArray);
-      // You can add additional logic here to process files
-    }
+  const toggleModal = () => {
+    setShowModal(!showModal);
   };
 
   return (
@@ -55,55 +20,22 @@ export const NoteBookSideMenu = () => {
           upload your notes and chat with them. More to come soon!
         </p>
         <div className="border border-gray-700"></div>
-
-        <div className="pt-4">
-          <p>Copy and paste your text you want to run llm on</p>
-          <p className="text-red-600">min 10 char*</p>
-          <textarea
-            className="w-full  p-2 border border-gray-700 rounded mt-6 min-h-14 max-h-40"
-            placeholder="Paste your text here..."
-          ></textarea>
-        </div>
-        <div className="pt-5">
-          <p>Add links</p>
-          <input
-            type="text"
-            className="w-full p-2 border border-gray-700 rounded mt-2"
-            placeholder="https://example.com"
-          />
-        </div>
-        <div className="">
-          <p className="mt-5 mb-2">Upload your files</p>
-          <div
-            onClick={handleDivClick}
-            onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
-            className={`h-28 border border-dashed ${
-              dragActive ? "border-blue-500 " : "border-gray-700"
-            }   w-full grid place-items-center rounded`}
-          >
-            <div className="">
-              <div className="text-center">
-                <p className="material-symbols-outlined block text-center !text-3xl ">
-                  upload
-                </p>
-              </div>
-              <p className="text-center">Drag and drop your files here</p>
-              <p className="text-center text-sm text-gray-600">
-                or click to select files
-              </p>
-            </div>
-          </div>
-        </div>
-        <input
-          onChange={handleFileChange}
-          ref={fileInputRef}
-          type="file"
-          className="w-full p-2 border border-gray-700 rounded mt-2 hidden"
-        />
       </div>
+      <div className="flex flex-col items-center justify-center mt-10 space-y-4">
+        <p>Please select source to get started </p>
+        <button onClick={toggleModal}>Select source</button>
+      </div>
+      <div className="">
+        <LoadingBar />
+      </div>
+
+      {showModal && (
+        <>
+          <ModalContainer onClose={toggleModal} isOpen={showModal}>
+            <TabSelector />
+          </ModalContainer>
+        </>
+      )}
     </div>
   );
 };
