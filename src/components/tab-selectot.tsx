@@ -47,6 +47,7 @@ const TabContent: React.FC<TabContentProps> = ({ isActive, children }) => {
 
 interface TabSelectorProps {
   handleSubmit: (data: File | string) => void;
+  handleClose: () => void;
 }
 
 export const TabSelector = (props: TabSelectorProps) => {
@@ -75,23 +76,16 @@ export const TabSelector = (props: TabSelectorProps) => {
         // Handle URL submission
         break;
       case 2:
-        uploadFileToRag();
+        if (files.length === 0) {
+          console.error("No files to upload");
+          return;
+        }
+        props.handleSubmit(files[0]);
         // Handle file upload submission
         break;
       default:
         break;
     }
-  };
-
-  const uploadFileToRag = () => {
-    if (files.length === 0) {
-      console.error("No files to upload");
-      return;
-    }
-    // Logic to upload files to RAG system
-    console.log("Uploading files to RAG:", files);
-    props.handleSubmit(files[0]);
-    // You can add your file upload logic here
   };
 
   return (
@@ -164,7 +158,9 @@ export const TabSelector = (props: TabSelectorProps) => {
         <button onClick={handleSubmit} className="cursor-pointer">
           Submit
         </button>
-        <button className="cursor-pointer">Cancel</button>
+        <button onClick={props.handleClose} className="cursor-pointer">
+          Cancel
+        </button>
       </div>
     </div>
   );

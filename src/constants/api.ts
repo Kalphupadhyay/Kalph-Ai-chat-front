@@ -1,4 +1,4 @@
 export const apiConfig = {
-  baseURL: "https://kalph-ai-chat-backend.vercel.app/api",
+  baseURL: "http://localhost:3000/api",
   chat: "/chat",
 };

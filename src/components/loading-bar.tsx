@@ -1,6 +1,6 @@
 interface LoadingBarProps {
   onComplete?: () => void;
-  start?: boolean;
+  isComplete: boolean;
   // You can add props if needed
 }
 
@@ -12,6 +12,12 @@ export const LoadingBar = (props: LoadingBarProps) => {
   useEffect(() => {
     handleStart();
   }, []);
+
+  useEffect(() => {
+    if (props.isComplete) {
+      setProgress(100);
+    }
+  }, [props.isComplete]);
 
   const handleStart = () => {
     setProgress(0);

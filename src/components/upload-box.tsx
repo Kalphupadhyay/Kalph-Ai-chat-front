@@ -81,6 +81,7 @@ export const UploadBox = (props: UploadBoxProps) => {
         onChange={handleFileChange}
         ref={fileInputRef}
         type="file"
+        accept=".pdf,.csv"
         className="w-full p-2 border border-gray-700 rounded mt-2 hidden"
       />
       <div className=""></div>
